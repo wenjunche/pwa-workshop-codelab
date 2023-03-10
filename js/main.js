@@ -78,4 +78,25 @@ window.addEventListener('DOMContentLoaded', async () => {
     },
     await db.get('settings', 'night-mode'),
   );
+
+  // Set up install prompt
+  const { Install } = await import('./lib/install.js');
+  const install = new Install(document.querySelector('#install'));
+
+  window.addEventListener('beforeinstallprompt', async (e) => {
+    console.log('beforeinstallprompt', e);
+    e.preventDefault();
+    install.toggleInstallButton('show', e);
+  });
+
+  window.addEventListener('appinstalled', async (e) => {
+    console.log('appinstalled', e);
+    e.preventDefault();
+    install.toggleInstallButton('hide', undefined);
+  });
+
+  window.launchQueue.setConsumer((launchParams) => {
+    console.log('launchQueue', launchParams);
+  });  
+
 });

@@ -81,7 +81,15 @@
   ],
     "launch_handler": {
         "client_mode": "focus-existing"
-    }
-
+    },
+    "file_handlers": [
+        {
+          "action": "/",
+          "accept": {
+            "text/csv": [".csv"]
+          },
+          "client_mode": "single-client"
+        }
+      ]    
 
 }

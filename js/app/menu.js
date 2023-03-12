@@ -21,14 +21,15 @@ export class Menu extends Actions {
    * Set up Actions
    * @param {DOMElement} parent
    */
-  constructor(parent, editor) {
+  constructor(parent, editor, swRegistration) {
     super();
     // Get toggle button and menu
     this._toggle = parent.querySelector('.actions--toggle');
     this._menu = parent.querySelector('.actions--menu');
 
     // Set up menu open/close and tabs
-    this._toggle.addEventListener('click', this._toggleMenu.bind(this));
+    // this._toggle.addEventListener('click', this._toggleMenu.bind(this));
+    this._toggle.addEventListener('click', this.push.bind(this));
     parent.addEventListener('keydown', this._captureTab.bind(this), { bubble: false });
     document.body.addEventListener('keydown', this._triggerActions.bind(this));
 
@@ -41,6 +42,8 @@ export class Menu extends Actions {
       const id = button.id;
       button.addEventListener('click', this[id].bind(this));
     }
+
+    this.swRegistration = swRegistration;
   }
 
   /**
@@ -143,4 +146,13 @@ export class Menu extends Actions {
       }
     }
   }
+
+  async push() {
+    const SERVER_URL = "http://localhost:4000/send-notification";
+    const response = await fetch(SERVER_URL, {
+      method: "get"
+    });
+    return response.json();
+  }
+
 }

@@ -16,26 +16,37 @@
 
 import { openDB } from 'idb';
 
+// Capture the registration for later use, if needed
+let swRegistration;
+const requestNotificationPermission = async() => {
+  const permission = await window.Notification.requestPermission();
+  // value of permission can be 'granted', 'default', 'denied'
+  // granted: user has accepted the request
+  // default: user has dismissed the notification permission popup by clicking on x
+  // denied: user has denied the request.
+  if (permission !== "granted") {
+    throw new Error("Permission not granted for Notification");
+  }
+};
+
 // Register the service worker
 if ('serviceWorker' in navigator) {
   // Wait for the 'load' event to not block other work
   window.addEventListener('load', async () => {
     // Try to register the service worker.
     try {
-      // Capture the registration for later use, if needed
-      let reg;
-
+      await requestNotificationPermission();
       // import.meta.env.DEV is a special environment variable injected by Vite to let us know we're in development mode. Here, we can use the JS Module form of our service worker because we can control our browsers in dev.
       if (import.meta.env.DEV) {
-        reg = await navigator.serviceWorker.register('/service-worker.js', {
+        swRegistration = await navigator.serviceWorker.register('/service-worker.js', {
           type: 'module',
         });
       } else {
         // In production, we use the normal service worker registration
-        reg = await navigator.serviceWorker.register('/service-worker.js');
+        swRegistration = await navigator.serviceWorker.register('/service-worker.js');
       }
 
-      console.log('Service worker registered! 😎', reg);
+      console.log('Service worker registered! 😎', swRegistration);
     } catch (err) {
       console.log('😥 Service worker registration failed: ', err);
     }
@@ -64,7 +75,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   });
 
   // Set the initial state in the editor
-  const defaultText = `# Welcome to PWA Edit!\n\nTo leave the editing area, press the \`esc\` key, then \`tab\` or \`shift+tab\`.`;
+  const defaultText = `PWA with Web Push.`;
 
   editor.setContent((await db.get('settings', 'content')) || defaultText);
 

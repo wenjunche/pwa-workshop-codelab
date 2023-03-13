@@ -1,6 +1,6 @@
 {
-  "name": "PWA Edit",
-  "short_name": "PWA Edit",
+  "name": "W PWA Example",
+  "short_name": "W PWA Example",
   "start_url": "/?source=pwa",
   "display": "standalone",
   "icons": [
@@ -48,7 +48,7 @@
   ],
   "theme_color": "#282c34",
   "background_color": "#282c34",
-  "description": "A PWA markdown editor",
+  "description": "A W PWA Example",
   "categories": [
     "productivity",
     "utilities"
@@ -57,7 +57,7 @@
     {
       "name": "Start in dark mode",
       "short_name": "Dark mode",
-      "description": "Start PWA Edit in dark mode",
+      "description": "Start W PWA Example in dark mode",
       "url": "/?source=pwa&mode=night",
       "icons": [
         {
@@ -69,7 +69,7 @@
     {
       "name": "Start in light mode",
       "short_name": "Light mode",
-      "description": "Start PWA Edit in light mode",
+      "description": "Start W PWA Example in light mode",
       "url": "/?source=pwa&mode=day",
       "icons": [
         {
@@ -84,12 +84,27 @@
     },
     "file_handlers": [
         {
-          "action": "/",
-          "accept": {
+            "action": "/",
+            "accept": {
             "text/csv": [".csv"]
-          },
-          "client_mode": "single-client"
+            },
+            "client_mode": "single-client"
         }
-      ]    
+    ],
+    "protocol_handlers": [
+        {
+          "protocol": "web+openfin",
+          "url": "/?handler=%s"
+        }
+      ],
+    "share_target": {
+        "action": "/",
+        "method": "GET",
+        "params": {
+        "title": "name",
+        "text": "description",
+        "url": "link"
+        }
+    }
 
 }

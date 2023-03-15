@@ -31,7 +31,8 @@
     "workbox-recipes": "^6.5.4",
     "workbox-routing": "^6.5.4",
     "workbox-strategies": "^6.5.4",
-    "workbox-streams": "^6.5.4"
+    "workbox-streams": "^6.5.4",
+    "web-push": "^3.5.0"
   },
   "volta": {
     "node": "14.16.0"

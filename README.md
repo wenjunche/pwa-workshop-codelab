@@ -23,3 +23,12 @@ There are two kinds of files in this codebase: application files and source file
 - `images/*` - Images associated with the application
 - `package.json` and `package-lock.json` - Node dependency files
 - `wmr.config.mjs` - Config file for [WMR](https://www.npmjs.com/package/wmr), the light-weight build tool being used for this project.
+
+### Web push files
+- `backend/` - Simple node server for testing webpush
+
+### Web push files
+- `npm run build:project` - to build UI
+- `npm run build:sw`      - to build service worker
+- `cd dist & http-server` - to host the app
+

@@ -27,3 +27,8 @@ There are two kinds of files in this codebase: application files and source file
 ### Web push files
 - `backend/` - Simple node server for testing webpush
 
+### Web push files
+- `npm run build:project` - to build UI
+- `npm run build:sw`      - to build service worker
+- `cd dist & http-server` - to host the app
+

@@ -2,7 +2,8 @@
   "name": "W PWA Example",
   "short_name": "W PWA Example",
   "start_url": "/?source=pwa",
-  "display": "standalone",
+  "display": "minimal-ui",
+  "display_override": ["window-controls-overlay"],
   "icons": [
     {
       "type": "image/png",
